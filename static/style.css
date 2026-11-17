@@ -1,0 +1,46 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: "Segoe UI", Arial, sans-serif;
+  background: #f1f4f9; color: #1f2937;
+}
+header { background: #1e3a8a; color: #fff; text-align: center; padding: 28px 16px; }
+header h1 { margin: 0 0 6px; }
+header p { margin: 0; opacity: 0.85; }
+main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+.card {
+  background: #fff; border-radius: 12px; padding: 22px;
+  margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+form { display: flex; gap: 10px; flex-wrap: wrap; }
+input[type="text"] {
+  flex: 1; min-width: 220px; padding: 12px; font-size: 16px;
+  border: 1px solid #cbd5e1; border-radius: 8px;
+}
+button {
+  padding: 12px 28px; font-size: 16px; border: 0; border-radius: 8px;
+  background: #2563eb; color: #fff; cursor: pointer;
+}
+button:hover { background: #1d4ed8; }
+.hint { color: #6b7280; font-size: 14px; }
+.error { color: #b91c1c; font-weight: 600; }
+.mono { font-family: Consolas, monospace; word-break: break-all; background: #f1f5f9; padding: 8px; border-radius: 6px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+.verdict { padding: 16px; border-radius: 10px; border: 2px solid; }
+.verdict.safe { background: #ecfdf5; border-color: #10b981; }
+.verdict.danger { background: #fef2f2; border-color: #ef4444; }
+.verdict h3 { margin: 0 0 6px; }
+.big { font-size: 22px; font-weight: 700; margin: 4px 0 10px; }
+.bar { height: 10px; background: #e5e7eb; border-radius: 6px; overflow: hidden; }
+.fill { height: 100%; background: #ef4444; }
+.verdict.safe .fill { background: #10b981; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; text-align: center; border-bottom: 1px solid #e5e7eb; }
+th { background: #eff6ff; }
+td:first-child { text-align: left; font-weight: 600; }
+figure { margin: 0; text-align: center; }
+img { max-width: 100%; height: auto; }
+footer { text-align: center; color: #6b7280; padding: 20px; }
+.slider-row { width: 100%; margin-top: 8px; }
+.slider-row label { display: block; margin-bottom: 6px; }
+input[type="range"] { width: 100%; }
