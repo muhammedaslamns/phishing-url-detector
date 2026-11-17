@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phishing URL Scanner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Phishing Website Detector</h1>
+    <p>Machine Learning Techniques project: Decision Tree vs Random Forest</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Scan a URL</h2>
+      <form method="post">
+        <input type="text" name="url" value="{{ url }}" maxlength="2000"
+               placeholder="Paste a URL, e.g. example.com/login" required>
+        <button type="submit">Scan</button>
+      </form>
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+      <p class="hint">The URL is only analysed as text. The page is never opened or visited.</p>
+    </section>
+
+    {% if predictions %}
+    <section class="card">
+      <h2>Result</h2>
+      <p class="mono">{{ url }}</p>
+      <div class="grid">
+        {% for p in predictions %}
+        <div class="verdict {{ p.css }}">
+          <h3>{{ p.model }}</h3>
+          <p class="big">{{ p.verdict }}</p>
+          <p>Phishing probability: <strong>{{ p.probability }}%</strong></p>
+          <div class="bar"><div class="fill" style="width: {{ p.probability }}%"></div></div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <h3>Warning signs found in the URL</h3>
+      {% if signs %}
+        <ul>{% for s in signs %}<li>{{ s }}</li>{% endfor %}</ul>
+      {% else %}
+        <p>No obvious warning signs were found in the URL text.</p>
+      {% endif %}
+      <p class="hint">This is a student project. A "legitimate" result is not a guarantee of safety.</p>
+    </section>
+    {% endif %}
+
+    <section class="card">
+      <h2>Model comparison (on unseen test data)</h2>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Model</th><th>Train acc.</th><th>Test acc.</th>
+            <th>Precision</th><th>Recall</th><th>F1</th><th>Train time</th>
+          </tr>
+          {% for r in results %}
+          <tr>
+            <td>{{ r.model }}</td><td>{{ r.train }}</td><td>{{ r.test }}</td>
+            <td>{{ r.precision }}</td><td>{{ r.recall }}</td><td>{{ r.f1 }}</td><td>{{ r.time }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Charts</h2>
+      <div class="grid">
+        <figure><img src="{{ url_for('static', filename='confusion_matrix_decision_tree.png') }}" alt="Decision Tree confusion matrix"></figure>
+        <figure><img src="{{ url_for('static', filename='confusion_matrix_random_forest.png') }}" alt="Random Forest confusion matrix"></figure>
+        <figure><img src="{{ url_for('static', filename='feature_importance_decision_tree.png') }}" alt="Decision Tree feature importance"></figure>
+        <figure><img src="{{ url_for('static', filename='feature_importance_random_forest.png') }}" alt="Random Forest feature importance"></figure>
+      </div>
+      <figure><img src="{{ url_for('static', filename='decision_tree_top.png') }}" alt="Top of the Decision Tree"></figure>
+    </section>
+  </main>
+
+  <footer>Phishing Website Detection · Python, scikit-learn, Flask</footer>
+</body>
+</html>
